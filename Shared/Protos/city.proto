@@ -1,0 +1,31 @@
+﻿// city.proto
+syntax = "proto3";
+
+option csharp_namespace = "protoServices.Grpc";
+
+package protoServices;
+
+service CityService {
+  rpc AddCity (CityRequest) returns (CityResponse);
+  rpc UpdateCity (CityRequest) returns (CityResponse);
+  rpc DeleteCity (DeleteRequest) returns (CityResponse);
+  rpc RollbackToAddCity (CityRequest) returns (CityResponse);  
+  rpc RollbackToUpdateCity (CityRequest) returns (CityResponse); 
+  rpc RollbackToDeleteCity (DeleteRequest) returns (CityResponse); 
+}
+
+message CityRequest {
+  string id = 1;
+  string name = 2;
+  bool deleted = 3;
+}
+
+message DeleteRequest {
+  string id = 1;
+}
+
+message CityResponse {
+  bool success = 1;
+  string message = 2;
+  string object = 3;
+}
